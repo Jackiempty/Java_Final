@@ -44,8 +44,8 @@ public class Game extends JPanel implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) player.turn(-0.05);
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.turn(0.05);
-        if (e.getKeyCode() == KeyEvent.VK_UP) player.move(1, map);
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) player.move(-1, map);
+        if (e.getKeyCode() == KeyEvent.VK_UP) player.move(0.5, map);
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) player.move(-0.5, map);
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}

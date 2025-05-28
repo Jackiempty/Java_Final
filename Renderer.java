@@ -1,16 +1,20 @@
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+
 
 public class Renderer {
     private int width, height;
     private Map map;
     private Player player;
 
+
     public Renderer(int width, int height, Map map, Player player) {
         this.width = width;
         this.height = height;
         this.map = map;
         this.player = player;
+        
     }
 
     public void render(Graphics g) {
@@ -80,6 +84,38 @@ public class Renderer {
             if (side == 1) shade = (int) (shade * 0.7); // darker shade for y-sides
             g.setColor(new Color(shade, shade, shade));
             g.drawLine(x, drawStart, x, drawEnd);
+
+            
+//            int texNum = map.getCell(mapX, mapY) - 1; // map值1 → 紋理0
+//            BufferedImage texture = textureLoader.getTexture(texNum);
+//
+//            double wallX;
+//            if (side == 0) wallX = player.y + perpWallDist * rayDirY;
+//            else           wallX = player.x + perpWallDist * rayDirX;
+//            wallX -= Math.floor(wallX);
+//
+//            int texX = (int)(wallX * texture.getWidth());
+//            if (side == 0 && rayDirX > 0) texX = texture.getWidth() - texX - 1;
+//            if (side == 1 && rayDirY < 0) texX = texture.getWidth() - texX - 1;
+//
+//            for (int y = drawStart; y < drawEnd; y++) {
+//                int d = y * 256 - height * 128 + lineHeight * 128;
+//                int texY = ((d * texture.getHeight()) / lineHeight) / 256;
+//
+//                if (texX >= 0 && texY >= 0 && texX < texture.getWidth() && texY < texture.getHeight()) {
+//                    int color = texture.getRGB(texX, texY);
+//                    if (side == 1) {
+//                        Color c = new Color(color);
+//                        color = new Color(
+//                            (int)(c.getRed() * 0.7),
+//                            (int)(c.getGreen() * 0.7),
+//                            (int)(c.getBlue() * 0.7)
+//                        ).getRGB();
+//                    }
+//                    g.setColor(new Color(color));
+//                    g.drawLine(x, y, x, y); // 畫1像素的垂直線
+//                }
+//            }
         }
     }
 }
