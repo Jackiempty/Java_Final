@@ -1,3 +1,4 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -33,6 +34,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
         }
     }
 
+   
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         renderer.render(g);
@@ -42,6 +44,8 @@ public class Game extends JPanel implements Runnable, KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) player.turn(-0.05);
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.turn(0.05);
+        if (e.getKeyCode() == KeyEvent.VK_UP) player.move(1, map);
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) player.move(-1, map);
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
