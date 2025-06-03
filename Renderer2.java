@@ -3,27 +3,32 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
-public class Renderer {
+public class Renderer2 {
     private int width, height;
     private Map map;
     private Player player;
     private TextureLoader textureLoader;
+    private BufferedImage screenImage;
 
 
-    public Renderer(int width, int height, Map map, Player player) {
+
+    public Renderer2(int width, int height, Map map, Player player) {
         this.width = width;
         this.height = height;
         this.map = map;
         this.player = player;
         this.textureLoader = new TextureLoader();
-        
+        screenImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
     }
 
     public void render(Graphics g) {
-        g.setColor(Color.GRAY); // sky
-        g.fillRect(0, 0, width, height / 2);
-        g.setColor(Color.GRAY); // floor
-        g.fillRect(0, height / 2, width, height / 2);
+    	Graphics2D g2d = screenImage.createGraphics();
+        g2d.setColor(Color.DARK_GRAY);
+        g2d.fillRect(0, 0, width, height / 2);
+        g2d.setColor(Color.GRAY);
+        g2d.fillRect(0, height / 2, width, height / 2);
+        g2d.dispose();
 
         for (int x = 0; x < width; x++) {
             double cameraX = 2 * x / (double) width - 1;
@@ -84,7 +89,7 @@ public class Renderer {
             
             //新增檢查
             if (drawStart < 0) drawStart = 0;
-            if (drawEnd > height) drawEnd = height-1;
+            if (drawEnd >= height) drawEnd = height - 1;
             
             int shade = Math.min(255, (int) (255 / perpWallDist));
             if (side == 1) shade = (int) (shade * 0.7); // darker shade for y-sides
@@ -121,10 +126,10 @@ public class Renderer {
                     ).getRGB();
                 }
 
-                g.setColor(new Color(color));
-                g.drawLine(x, y, x, y);  // 或改為畫 pixel（例如填 BufferedImage）
+                screenImage.setRGB(x, y, color);
             }
 
+            g.drawImage(screenImage, 0, 0, null);
 
         }
     }

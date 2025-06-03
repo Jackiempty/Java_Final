@@ -4,18 +4,24 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class TextureLoader {
-    private final HashMap<Integer, BufferedImage> textures = new HashMap<>();
+    private HashMap<Integer, BufferedImage> textures = new HashMap<>();
 
-    public void loadTexture(int id, String path) {
+    public TextureLoader() {
         try {
-            BufferedImage img = ImageIO.read(getClass().getResource(path));
-            textures.put(id, img);
-        } catch (IOException | IllegalArgumentException e) {
+            textures.put(1, ImageIO.read(getClass().getResource("/resources/tex1.png")));
+            textures.put(2, ImageIO.read(getClass().getResource("/resources/tex2.png")));
+            textures.put(3, ImageIO.read(getClass().getResource("/resources/tex3.png")));
+            textures.put(4, ImageIO.read(getClass().getResource("/resources/tex4.png")));
+            textures.put(5, ImageIO.read(getClass().getResource("/resources/tex5.png")));
+            textures.put(6, ImageIO.read(getClass().getResource("/resources/tex6.png")));
+            textures.put(7, ImageIO.read(getClass().getResource("/resources/tex7.png")));
+            textures.put(8, ImageIO.read(getClass().getResource("/resources/tex8.png")));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public BufferedImage getTexture(int id) {
-        return textures.get(id);
+    public BufferedImage getTexture(int index) {
+        return textures.get(index);
     }
 }
