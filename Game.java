@@ -29,6 +29,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
 
     public void run() {
         while (running) {
+            detect_tp();
             repaint();
             try { Thread.sleep(16); } catch (InterruptedException e) {}
         }
@@ -40,12 +41,34 @@ public class Game extends JPanel implements Runnable, KeyListener {
         renderer.render(g);
     }
 
+    private void detect_tp() {
+        switch (map.getMapNum()) {
+            case 0:
+                
+                break;
+            case 1:
+                if(player.x >= 22) {
+                    map.changeMap(0);
+                    player.x = 1.5;
+                    player.y = 1.5;
+                }
+                break;
+            case 2:
+                
+                break;
+            default:
+                break;
+        }
+    }
+
     // keyboard input
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) player.turn(-0.05);
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.turn(0.05);
-        if (e.getKeyCode() == KeyEvent.VK_UP) player.move(0.5, map);
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) player.move(-0.5, map);
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) player.turn(-0.1);
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) player.turn(0.1);
+        if (e.getKeyCode() == KeyEvent.VK_W) player.move_FB(0.5, map);
+        if (e.getKeyCode() == KeyEvent.VK_A) player.move_LR(-0.5, map);
+        if (e.getKeyCode() == KeyEvent.VK_S) player.move_FB(-0.5, map);
+        if (e.getKeyCode() == KeyEvent.VK_D) player.move_LR(0.5, map);
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}
