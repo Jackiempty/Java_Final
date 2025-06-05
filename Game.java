@@ -62,6 +62,13 @@ public class Game extends JPanel implements Runnable, KeyListener {
     }
   }
 
+  private void restart() {
+    player.setParams(1.5, 1.5, 0);
+    map.changeMap(0);
+  }
+
+  private void showRules() {}
+
   // keyboard input
   public void keyPressed(KeyEvent e) {
     if (e.getKeyCode() == KeyEvent.VK_LEFT)
@@ -76,6 +83,10 @@ public class Game extends JPanel implements Runnable, KeyListener {
       player.move_FB(-0.5, map);
     if (e.getKeyCode() == KeyEvent.VK_D)
       player.move_LR(0.5, map);
+    if (e.getKeyCode() == KeyEvent.VK_P) // restart buttom
+      restart();
+    if (e.getKeyCode() == KeyEvent.VK_TAB) // show game rules
+      showRules();
   }
   public void keyReleased(KeyEvent e) {}
   public void keyTyped(KeyEvent e) {}

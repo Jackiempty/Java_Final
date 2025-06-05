@@ -81,7 +81,7 @@ public class Renderer {
       int drawStart = -lineHeight / 2 + height / 2;
       int drawEnd = lineHeight / 2 + height / 2;
 
-      // 新增檢查
+      // add check
       if (drawStart < 0)
         drawStart = 0;
       if (drawEnd > height)
@@ -112,7 +112,7 @@ public class Renderer {
         int d = y * 256 - height * 128 + lineHeight * 128;
         int texY = ((d * texture.getHeight()) / lineHeight) / 256;
 
-        // 加入邊界檢查
+        // border check
         if (texY < 0)
           texY = 0;
         if (texY >= texture.getHeight())
@@ -128,8 +128,47 @@ public class Renderer {
         }
 
         g.setColor(new Color(color));
-        g.drawLine(x, y, x, y); // 或改為畫 pixel（例如填 BufferedImage）
+        g.drawLine(x, y, x, y);
       }
     }
+
+    // renderMiniMap(g);
+    renderRules(g);
+  }
+
+  public void renderMiniMap(Graphics g) {
+    int tileSize = 8; // display size for each block
+    int offsetX = 10; // starting x position in mini map
+    int offsetY = 10; // starting y position in mini map
+
+    // draw mini map block
+    for (int y = 0; y < map.getHeight(); y++) {
+      for (int x = 0; x < map.getWidth(); x++) {
+        if (map.isWall(x, y)) {
+          g.setColor(Color.DARK_GRAY);
+        } else {
+          g.setColor(Color.LIGHT_GRAY);
+        }
+        g.fillRect(offsetX + x * tileSize, offsetY + y * tileSize, tileSize, tileSize);
+      }
+    }
+
+    // draw player position
+    int playerX = (int) (offsetX + player.x * tileSize);
+    int playerY = (int) (offsetY + player.y * tileSize);
+    g.setColor(Color.RED);
+    g.fillOval(playerX - 3, playerY - 3, 6, 6);
+
+    // show player's direction
+    int lineLength = 10;
+    int dirX = (int) (Math.cos(player.angle) * lineLength);
+    int dirY = (int) (Math.sin(player.angle) * lineLength);
+    g.drawLine(playerX, playerY, playerX + dirX, playerY + dirY);
+  }
+
+  public void renderRules(Graphics g) {
+    int tileSize = 8; // display size for each block
+    int offsetX = 10; // starting x position in mini map
+    int offsetY = 10; // starting y position in mini map
   }
 }
