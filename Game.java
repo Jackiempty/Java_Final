@@ -6,6 +6,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
   private final int WIDTH = 800, HEIGHT = 600;
   private Thread thread;
   private boolean running = false;
+  private int Rule = -1;
 
   private Player player;
   private Map map;
@@ -40,6 +41,9 @@ public class Game extends JPanel implements Runnable, KeyListener {
   protected void paintComponent(Graphics g) {
     super.paintComponent(g);
     renderer.render(g);
+    if (Rule == 1) {
+      renderer.renderRules(g);
+    }
   }
 
   private void detect_tp() {
@@ -67,8 +71,6 @@ public class Game extends JPanel implements Runnable, KeyListener {
     map.changeMap(0);
   }
 
-  private void showRules() {}
-
   // keyboard input
   public void keyPressed(KeyEvent e) {
     if (e.getKeyCode() == KeyEvent.VK_LEFT)
@@ -85,8 +87,9 @@ public class Game extends JPanel implements Runnable, KeyListener {
       player.move_LR(0.5, map);
     if (e.getKeyCode() == KeyEvent.VK_P) // restart buttom
       restart();
-    if (e.getKeyCode() == KeyEvent.VK_TAB) // show game rules
-      showRules();
+    if (e.getKeyCode() == KeyEvent.VK_O) // show game rules
+      Rule *= -1;
+    // System.out.println("Rule = " + Rule);
   }
   public void keyReleased(KeyEvent e) {}
   public void keyTyped(KeyEvent e) {}

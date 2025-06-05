@@ -133,7 +133,6 @@ public class Renderer {
     }
 
     // renderMiniMap(g);
-    renderRules(g);
   }
 
   public void renderMiniMap(Graphics g) {
@@ -168,7 +167,17 @@ public class Renderer {
 
   public void renderRules(Graphics g) {
     int tileSize = 8; // display size for each block
-    int offsetX = 10; // starting x position in mini map
-    int offsetY = 10; // starting y position in mini map
+    int offsetX = 100; // starting x position in mini map
+    int offsetY = 20; // starting y position in mini map
+
+    BufferedImage texture = textureLoader.getTexture(1);
+    // g.drawImage(texture, offsetX, offsetY, null);
+    for (int x = 0; x < texture.getWidth(); x++) {
+      for (int y = 0; y < texture.getHeight(); y++) {
+        int color = texture.getRGB(x, y);
+        g.setColor(new Color(color));
+        g.fillRect(offsetX + x * tileSize, offsetY + y * tileSize, tileSize, tileSize);
+      }
+    }
   }
 }
