@@ -57,7 +57,7 @@ public class Map {
   
   public int[][] map = map0;//初始地圖
 
-  public int map_num = 1;
+  public int map_num = 0;
 
   public boolean isWall(double x, double y) {
     int mapX = (int) x;

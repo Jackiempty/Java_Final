@@ -16,7 +16,7 @@ public class Player {
 
   public void turn(double delta) {
     angle += delta;
-    System.out.println("Turn attempt to:" + angle);
+    System.out.println("Turn attempt to: " + angle);
   }
 
   public void move_FB(double distance, Map map) { // move forward and backward

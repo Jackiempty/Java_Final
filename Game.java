@@ -7,6 +7,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
   private Thread thread;
   private boolean running = false;
   private int Rule = -1;
+  private int counter = 1;
 
   private Player player;
   private Map map;
@@ -17,7 +18,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
     setFocusable(true);
     addKeyListener(this);
     map = new Map();
-    player = new Player(1.5, 4.5, 0);
+    player = new Player(1.5, 4.5, 1.57);
     renderer = new Renderer(WIDTH, HEIGHT, map, player);
   }
 
@@ -30,6 +31,8 @@ public class Game extends JPanel implements Runnable, KeyListener {
   public void run() {
     while (running) {
       detect_tp();
+      if (counter == 0)
+        reset_counter();
       repaint();
       try {
         Thread.sleep(16);
@@ -49,13 +52,37 @@ public class Game extends JPanel implements Runnable, KeyListener {
   private void detect_tp() {
     switch (map.getMapNum()) {
       case 0:
+        if (player.x >= 31 && player.x <= 32 && player.y >= 18 && player.y <= 19) {
+          restart();
+        }
 
+        if (player.x >= 1 && player.x <= 2 && player.y >= 16 && player.y <= 17) {
+          restart();
+        }
+
+        if (player.x >= 19 && player.x <= 20 && player.y >= 15 && player.y <= 16 && counter == 1) {
+          map.changeMap(1);
+          player.setParams(1.5, 1.5, 0);
+          counter = 0;
+        }
+
+        if (player.x >= 39 && player.x <= 40 && player.y >= 23 && player.y <= 24 && counter == 1) {
+          map.changeMap(1);
+          player.setParams(8.5, 2.5, 4.71);
+          counter = 0;
+        }
         break;
       case 1:
-        if (player.x >= 22) {
+        if (player.x >= 1 && player.x <= 2 && player.y >= 1 && player.y <= 2 && counter == 1) {
           map.changeMap(0);
-          player.x = 1.5;
-          player.y = 1.5;
+          player.setParams(19.5, 15.5, 4.71);
+          counter = 0;
+        }
+
+        if (player.x >= 8 && player.x <= 9 && player.y >= 2 && player.y <= 3 && counter == 1) {
+          map.changeMap(0);
+          player.setParams(39.5, 23.5, 4.71);
+          counter = 0;
         }
         break;
       case 2:
@@ -67,8 +94,32 @@ public class Game extends JPanel implements Runnable, KeyListener {
   }
 
   private void restart() {
-    player.setParams(1.5, 1.5, 0);
+    player.setParams(1.5, 4.5, 90);
     map.changeMap(0);
+  }
+
+  private void reset_counter() {
+    switch (map.getMapNum()) {
+      case 0:
+        if (!(player.x >= 19 && player.x <= 20 && player.y >= 15 && player.y <= 16)) {
+          counter = 1;
+        }
+
+        if (!(player.x >= 39 && player.x <= 40 && player.y >= 23 && player.y <= 24)) {
+          counter = 1;
+        }
+        break;
+      case 1:
+        if (!(player.x >= 1 && player.x <= 2 && player.y >= 1 && player.y <= 2)) {
+          counter = 1;
+        }
+        if (!(player.x >= 8 && player.x <= 9 && player.y >= 2 && player.y <= 3)) {
+          counter = 1;
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   // keyboard input
