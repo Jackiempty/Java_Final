@@ -19,7 +19,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
     setFocusable(true);
     addKeyListener(this);
     map = new Map();
-    player = new Player(39.5, 22, 1.57);
+    player = new Player(1.5, 4.5, 1.57);
     renderer = new Renderer(WIDTH, HEIGHT, map, player);
   }
 
