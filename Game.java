@@ -12,7 +12,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
 
   private Player player;
   private Map map;
-  private Renderer2 renderer;
+  private Renderer renderer;
 
   public Game() {
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -20,7 +20,7 @@ public class Game extends JPanel implements Runnable, KeyListener {
     addKeyListener(this);
     map = new Map();
     player = new Player(39.5, 22, 1.57);
-    renderer = new Renderer2(WIDTH, HEIGHT, map, player);
+    renderer = new Renderer(WIDTH, HEIGHT, map, player);
   }
 
   public void start() {
