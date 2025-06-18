@@ -134,7 +134,24 @@ public class Renderer2 {
         screenImage.setRGB(x, y, color);
       }
 
-      g.drawImage(screenImage, 0, 0, null);
+      
     }
+    g.drawImage(screenImage, 0, 0, null);
+  }
+
+  public void renderImage(Graphics g, int num) {
+    // int tileSize = 1; // display size for each block
+    int offsetX = 0; // starting x position in mini map
+    int offsetY = 0; // starting y position in mini map
+
+    BufferedImage texture = textureLoader.getTexture(num);
+    g.drawImage(texture, offsetX, offsetY, null);
+    // for (int x = 0; x < texture.getWidth(); x++) {
+    //   for (int y = 0; y < texture.getHeight(); y++) {
+    //     int color = texture.getRGB(x, y);
+    //     g.setColor(new Color(color));
+    //     g.fillRect(offsetX + x * tileSize, offsetY + y * tileSize, tileSize, tileSize);
+    //   }
+    // }
   }
 }

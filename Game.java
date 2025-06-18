@@ -8,18 +8,19 @@ public class Game extends JPanel implements Runnable, KeyListener {
   private boolean running = false;
   private int Rule = -1;
   private int counter = 1;
+  private int pass = 0;
 
   private Player player;
   private Map map;
-  private Renderer renderer;
+  private Renderer2 renderer;
 
   public Game() {
     setPreferredSize(new Dimension(WIDTH, HEIGHT));
     setFocusable(true);
     addKeyListener(this);
     map = new Map();
-    player = new Player(1.5, 4.5, 1.57);
-    renderer = new Renderer(WIDTH, HEIGHT, map, player);
+    player = new Player(39.5, 22, 1.57);
+    renderer = new Renderer2(WIDTH, HEIGHT, map, player);
   }
 
   public void start() {
@@ -45,7 +46,12 @@ public class Game extends JPanel implements Runnable, KeyListener {
     super.paintComponent(g);
     renderer.render(g);
     if (Rule == 1) {
-      renderer.renderRules(g);
+      renderer.renderImage(g, 9);
+    }
+
+    if (pass == 1) {
+      renderer.renderImage(g, 10);
+      // System.out.println("pass!");
     }
   }
 
@@ -71,17 +77,21 @@ public class Game extends JPanel implements Runnable, KeyListener {
           player.setParams(8.5, 2.5, 4.71);
           counter = 0;
         }
+
+        if (player.x >= 41 && player.x <= 42 && player.y >= 10 && player.y <= 11) {
+          pass = 1;
+        }
         break;
       case 1:
         if (player.x >= 1 && player.x <= 2 && player.y >= 1 && player.y <= 2 && counter == 1) {
           map.changeMap(0);
-          player.setParams(19.5, 15.5, 4.71);
+          player.setParams(19.5, 15.5, player.angle);
           counter = 0;
         }
 
         if (player.x >= 8 && player.x <= 9 && player.y >= 2 && player.y <= 3 && counter == 1) {
           map.changeMap(0);
-          player.setParams(39.5, 23.5, 4.71);
+          player.setParams(39.5, 23.5, player.angle);
           counter = 0;
         }
         break;
@@ -94,26 +104,21 @@ public class Game extends JPanel implements Runnable, KeyListener {
   }
 
   private void restart() {
-    player.setParams(1.5, 4.5, 90);
+    player.setParams(1.5, 4.5, 1.57);
     map.changeMap(0);
   }
 
   private void reset_counter() {
     switch (map.getMapNum()) {
       case 0:
-        if (!(player.x >= 19 && player.x <= 20 && player.y >= 15 && player.y <= 16)) {
-          counter = 1;
-        }
-
-        if (!(player.x >= 39 && player.x <= 40 && player.y >= 23 && player.y <= 24)) {
+        if (!(player.x >= 19 && player.x <= 20 && player.y >= 15 && player.y <= 16)
+            && !(player.x >= 39 && player.x <= 40 && player.y >= 23 && player.y <= 24)) {
           counter = 1;
         }
         break;
       case 1:
-        if (!(player.x >= 1 && player.x <= 2 && player.y >= 1 && player.y <= 2)) {
-          counter = 1;
-        }
-        if (!(player.x >= 8 && player.x <= 9 && player.y >= 2 && player.y <= 3)) {
+        if (!(player.x >= 1 && player.x <= 2 && player.y >= 1 && player.y <= 2)
+            && !(player.x >= 8 && player.x <= 9 && player.y >= 2 && player.y <= 3)) {
           counter = 1;
         }
         break;

@@ -165,19 +165,19 @@ public class Renderer {
     g.drawLine(playerX, playerY, playerX + dirX, playerY + dirY);
   }
 
-  public void renderRules(Graphics g) {
-    int tileSize = 8; // display size for each block
-    int offsetX = 100; // starting x position in mini map
-    int offsetY = 20; // starting y position in mini map
+  public void renderImage(Graphics g, int num) {
+    // int tileSize = 1; // display size for each block
+    int offsetX = 0; // starting x position in mini map
+    int offsetY = 0; // starting y position in mini map
 
-    BufferedImage texture = textureLoader.getTexture(1);
-    // g.drawImage(texture, offsetX, offsetY, null);
-    for (int x = 0; x < texture.getWidth(); x++) {
-      for (int y = 0; y < texture.getHeight(); y++) {
-        int color = texture.getRGB(x, y);
-        g.setColor(new Color(color));
-        g.fillRect(offsetX + x * tileSize, offsetY + y * tileSize, tileSize, tileSize);
-      }
-    }
+    BufferedImage texture = textureLoader.getTexture(num);
+    g.drawImage(texture, offsetX, offsetY, null);
+    // for (int x = 0; x < texture.getWidth(); x++) {
+    //   for (int y = 0; y < texture.getHeight(); y++) {
+    //     int color = texture.getRGB(x, y);
+    //     g.setColor(new Color(color));
+    //     g.fillRect(offsetX + x * tileSize, offsetY + y * tileSize, tileSize, tileSize);
+    //   }
+    // }
   }
 }

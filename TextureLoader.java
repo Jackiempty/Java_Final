@@ -16,6 +16,8 @@ public class TextureLoader {
       textures.put(6, ImageIO.read(getClass().getResource("/resources/tex6.png")));
       textures.put(7, ImageIO.read(getClass().getResource("/resources/tex7.png")));
       textures.put(8, ImageIO.read(getClass().getResource("/resources/tex8.png")));
+      textures.put(9, ImageIO.read(getClass().getResource("/resources/Rule.jpeg")));
+      textures.put(10, ImageIO.read(getClass().getResource("/resources/End.jpeg")));
     } catch (IOException e) {
       e.printStackTrace();
     }
